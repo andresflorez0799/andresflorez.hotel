@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\andresflorez.hotel.modelo\andresflorez.hotel.modelo.csproj" />
+    <ProjectReference Include="..\andresflorez.hotel.repositorio\andresflorez.hotel.repositorio.csproj" />
+  </ItemGroup>
+
+</Project>

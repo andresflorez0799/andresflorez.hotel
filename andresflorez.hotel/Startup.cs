@@ -1,3 +1,4 @@
+using andresflorez.hotel.service.Wrapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +33,8 @@ namespace andresflorez.hotel
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "andresflorez.hotel", Version = "v1" });
             });
+
+            services.AddScoped<IWrapperRepository, WrapperRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
