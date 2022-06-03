@@ -11,5 +11,11 @@ namespace andresflorez.hotel.api.Controllers
     [ApiController]
     public class OmegaResortController : ControllerBase
     {
+        /// <summary>
+        /// Metodo de validacion api
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("index")]
+        public IActionResult Index() => Ok("Api funcionando correctamente!!");
     }
 }
