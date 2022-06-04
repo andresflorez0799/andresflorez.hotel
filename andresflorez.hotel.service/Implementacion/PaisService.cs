@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace andresflorez.hotel.service.Implementacion
 {
-    public class PaisService :RepositorioBase<Pai>, IPaisService
+    public class PaisService : RepositorioBase<Pai>, IPaisService
     {
         public PaisService(DbContext context) : base(context)
         {

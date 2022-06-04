@@ -27,10 +27,27 @@ namespace andresflorez.hotel.api.Controllers
                     return new JsonResult(modelo);
                 return NotFound("Sin resultado");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500, $"Error interno: por favor valide con el administrador del sistema");
+                return GetErrorApi(ex);
             }
         }
+
+        [HttpGet("")]//TODO: Mejorar que se pagine la peticion / respuesta
+        public IActionResult GetUsuario()
+        {
+            try
+            {
+                var modelo = repositorio.UsuarioWrapper.GetUsuario();
+                if (modelo != null)
+                    return new JsonResult(modelo);
+                return NotFound("Sin resultado");
+            }
+            catch (Exception ex)
+            {
+                return GetErrorApi(ex);
+            }
+        }
+
     }
 }

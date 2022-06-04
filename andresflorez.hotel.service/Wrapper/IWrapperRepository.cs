@@ -11,5 +11,6 @@ namespace andresflorez.hotel.service.Wrapper
     {
         IUsuarioService UsuarioWrapper { get; }
         IPaisService PaisWrapper { get; }
+        IReservaService ReservaWrapper { get; }
     }
 }

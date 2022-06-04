@@ -17,5 +17,7 @@ namespace andresflorez.hotel.service.Implementacion
         }
         public Usuario GetUsuario(int id) => FindById(id);
 
+        public List<Usuario> GetUsuario() => FindAll().ToList();
+        
     }
 }

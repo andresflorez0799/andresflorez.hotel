@@ -12,5 +12,12 @@ namespace andresflorez.hotel.api.Controllers
         protected IWrapperRepository repositorio;
         public BaseControllerApi(IWrapperRepository wrapperRepository) 
             => repositorio = wrapperRepository;
+
+        protected ObjectResult GetErrorApi(Exception ex) 
+        {
+            if (ex.Message.Contains("ValidacionNegocio"))
+                return StatusCode(500, $"Error interno: {ex.Message.Replace("ValidacionNegocio", string.Empty)}");
+            return StatusCode(500, $"Error interno: por favor valide con el administrador del sistema");
+        }
     }
 }

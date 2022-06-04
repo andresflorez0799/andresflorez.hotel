@@ -27,9 +27,9 @@ namespace andresflorez.hotel.api.Controllers
                     return new JsonResult(modelo);
                 return NotFound("Sin resultado");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500, $"Error interno: por favor valide con el administrador del sistema");
+                return GetErrorApi(ex);
             }
         }
 
@@ -43,9 +43,9 @@ namespace andresflorez.hotel.api.Controllers
                     return new JsonResult(modelo);
                 return NotFound("Sin resultado");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500, $"Error interno: por favor valide con el administrador del sistema");
+                return GetErrorApi(ex);
             }
         }
     }

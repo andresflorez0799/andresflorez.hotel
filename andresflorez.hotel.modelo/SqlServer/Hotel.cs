@@ -9,6 +9,7 @@ namespace andresflorez.hotel.modelo.SqlServer
     {
         public Hotel()
         {
+            HotelHabitacions = new HashSet<HotelHabitacion>();
             Reservas = new HashSet<Reserva>();
         }
 
@@ -22,6 +23,7 @@ namespace andresflorez.hotel.modelo.SqlServer
         public int HotelNumeroHabitaciones { get; set; }
 
         public virtual Pai IdPaisNavigation { get; set; }
+        public virtual ICollection<HotelHabitacion> HotelHabitacions { get; set; }
         public virtual ICollection<Reserva> Reservas { get; set; }
     }
 }

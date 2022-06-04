@@ -11,12 +11,14 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace andresflorez.hotel
 {
     public class Startup
     {
+        readonly string MyCors = "Cors_ApiHotel";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,6 +29,19 @@ namespace andresflorez.hotel
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyCors,
+                      builder =>
+                      {
+                          builder.WithOrigins(new string[] {
+                                "http://localhost:4200",
+                          }); //aqui puede ir la ip
+                          builder.AllowAnyHeader();
+                          builder.AllowAnyMethod();
+                          builder.AllowCredentials();
+                      });
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -35,6 +50,11 @@ namespace andresflorez.hotel
             });
 
             services.AddScoped<IWrapperRepository, WrapperRepository>();
+
+            services.AddControllers(options => { 
+            }).AddJsonOptions(
+               jsonOption => // ignora las referencias ciclicas de la Base de Datos
+               jsonOption.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +69,27 @@ namespace andresflorez.hotel
 
             app.UseHttpsRedirection();
 
+            app.UseStaticFiles();
+
+            app.UseSwagger(c =>
+            {
+                c.PreSerializeFilters.Add((swagger, httpReq) =>
+                {
+                    swagger.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}/{httpReq.Headers["X-Forwarded-Prefix"]}" } };
+                });
+            });
+
             app.UseRouting();
+
+            app.UseCors(options =>
+            {
+                options.WithOrigins(new string[] {
+                                "http://localhost:4200",
+                                });
+                options.AllowAnyMethod();
+                options.AllowAnyHeader();
+                options.AllowCredentials();
+            });
 
             app.UseAuthorization();
 

@@ -14,6 +14,7 @@ namespace andresflorez.hotel.service.Wrapper
 
         private IUsuarioService _usuarioService;
         private IPaisService _paisService;
+        private IReservaService _reservaService;
 
         public WrapperRepository() => _hotelContexto = new();
 
@@ -34,6 +35,16 @@ namespace andresflorez.hotel.service.Wrapper
                 if (_paisService is null)
                     _paisService = new PaisService(_hotelContexto);
                 return _paisService;
+            }
+        }
+
+        public IReservaService ReservaWrapper 
+        {
+            get
+            {
+                if (_reservaService is null)
+                    _reservaService = new ReservaService(_hotelContexto);
+                return _reservaService;
             }
         }
     }

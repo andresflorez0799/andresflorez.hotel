@@ -10,5 +10,6 @@ namespace andresflorez.hotel.service.Contrato
     public interface IUsuarioService
     {
         Usuario GetUsuario(int id);
+        List<Usuario> GetUsuario();
     }
 }

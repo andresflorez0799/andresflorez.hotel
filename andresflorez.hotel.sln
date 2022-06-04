@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "andresflorez.hotel.service"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "andresflorez.hotel.repositorio", "andresflorez.hotel.repositorio\andresflorez.hotel.repositorio.csproj", "{4AD3D654-A644-4560-B840-E02E3E05258B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "andresflorez.api.test", "andresflorez.api.test\andresflorez.api.test.csproj", "{0976137C-DAE4-4397-9257-6470ACC04454}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{4AD3D654-A644-4560-B840-E02E3E05258B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AD3D654-A644-4560-B840-E02E3E05258B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AD3D654-A644-4560-B840-E02E3E05258B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0976137C-DAE4-4397-9257-6470ACC04454}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0976137C-DAE4-4397-9257-6470ACC04454}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0976137C-DAE4-4397-9257-6470ACC04454}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0976137C-DAE4-4397-9257-6470ACC04454}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -19,6 +19,7 @@ namespace andresflorez.hotel.modelo.SqlServer
         }
 
         public virtual DbSet<Hotel> Hotels { get; set; }
+        public virtual DbSet<HotelHabitacion> HotelHabitacions { get; set; }
         public virtual DbSet<Pai> Pais { get; set; }
         public virtual DbSet<Reserva> Reservas { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
@@ -66,8 +67,33 @@ namespace andresflorez.hotel.modelo.SqlServer
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
+            modelBuilder.Entity<HotelHabitacion>(entity =>
+            {
+                entity.ToTable("HotelHabitacion");
+
+                entity.HasIndex(e => new { e.IdHotel, e.HotelHabitacionCodigo }, "UK_HotelHabitacion_UniqueHotel")
+                    .IsUnique();
+
+                entity.Property(e => e.HotelHabitacionCodigo)
+                    .IsRequired()
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.HotelHabitacionEstado)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.HasOne(d => d.IdHotelNavigation)
+                    .WithMany(p => p.HotelHabitacions)
+                    .HasForeignKey(d => d.IdHotel)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
             modelBuilder.Entity<Pai>(entity =>
             {
+                entity.HasIndex(e => e.PaisNombre, "UK_Pais_Unique")
+                    .IsUnique();
+
                 entity.Property(e => e.PaisEstado)
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
@@ -97,6 +123,11 @@ namespace andresflorez.hotel.modelo.SqlServer
                     .HasForeignKey(d => d.IdHotel)
                     .OnDelete(DeleteBehavior.ClientSetNull);
 
+                entity.HasOne(d => d.IdHotelHabitacionNavigation)
+                    .WithMany(p => p.Reservas)
+                    .HasForeignKey(d => d.IdHotelHabitacion)
+                    .HasConstraintName("FK_Reserva_HotelHaitacion_IdHotelHabitacion");
+
                 entity.HasOne(d => d.IdUsuarioNavigation)
                     .WithMany(p => p.Reservas)
                     .HasForeignKey(d => d.IdUsuario)
@@ -106,6 +137,9 @@ namespace andresflorez.hotel.modelo.SqlServer
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.ToTable("Usuario");
+
+                entity.HasIndex(e => e.UsuarioEmail, "UK_Usuario_UniqueEmail")
+                    .IsUnique();
 
                 entity.Property(e => e.UsuarioApellido)
                     .IsRequired()
