@@ -14,7 +14,7 @@ CREATE TABLE Usuario
 )
 GO
 INSERT INTO Usuario(UsuarioNombre, UsuarioApellido, UsuarioEmail, UsuarioDireccion)VALUES
-('Nombre Usuario1', 'Apellido Usuario1', 'Usuario1@correo.com', 'Direccion Usuario1'),
+('Nombre Usuario1', 'Apellido Usuario1', 'usuario1@correo.com', 'Direccion Usuario1'),
 ('Nombre Usuario2', 'Apellido Usuario2', 'Usuario2@correo.com', 'Direccion Usuario2'),
 ('Nombre Usuario3', 'Apellido Usuario3', 'Usuario3@correo.com', 'Direccion Usuario3')
 
@@ -79,3 +79,9 @@ CREATE TABLE Reserva
 	CONSTRAINT FK_Reserva_HotelHaitacion_IdHotelHabitacion FOREIGN KEY (IdHotelHabitacion) REFERENCES HotelHabitacion(Id),
 )
 GO
+
+
+SELECT * FROM Reserva
+
+UPDATE Reserva SET ReservaEstado = 0 WHERE Id = 2
+
